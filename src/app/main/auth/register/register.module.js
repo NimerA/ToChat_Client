@@ -10,7 +10,7 @@
     function config($stateProvider, $translatePartialLoaderProvider)
     {
         // State
-        $stateProvider.state('app..register', {
+        $stateProvider.state('app.register', {
             url      : '/register',
             views    : {
                 'main@'                          : {
@@ -26,7 +26,7 @@
         });
 
         // Translation
-        $translatePartialLoaderProvider.addPart('app/main/pages/auth/register');
+        $translatePartialLoaderProvider.addPart('app/main/auth/register');
 
     }
 

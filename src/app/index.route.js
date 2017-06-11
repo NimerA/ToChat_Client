@@ -11,7 +11,7 @@
     {
         $locationProvider.html5Mode(true);
 
-        $urlRouterProvider.otherwise('/sample');
+        $urlRouterProvider.otherwise('/login');
 
         var $cookies;
 
@@ -27,16 +27,8 @@
                 abstract: true,
                 views   : {
                     'main@'         : {
-                        templateUrl: 'app/core/layouts/content-with-toolbar.html',
+                        templateUrl: 'app/core/layouts/content-only.html',
                         controller : 'MainController as vm'
-                    },
-                    'toolbar@app'   : {
-                        templateUrl: 'app/toolbar/layouts/content-with-toolbar/toolbar.html',
-                        controller : 'ToolbarController as vm'
-                    },
-                    'quickPanel@app': {
-                        templateUrl: 'app/quick-panel/quick-panel.html',
-                        controller : 'QuickPanelController as vm'
                     }
                 }
             });

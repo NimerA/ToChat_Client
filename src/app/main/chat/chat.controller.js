@@ -7,10 +7,17 @@
         .controller('ChatController', ChatController);
 
     /** @ngInject */
-    function ChatController(Contacts, ChatsService, $mdSidenav, User, $timeout, $document, $mdMedia)
+    function ChatController($cookies, $rootScope, $state, Contacts, ChatsService, $mdSidenav, User, $timeout, $document, $mdMedia, Client)
     {
-
+        
         var vm = this;
+
+        if($cookies.getObject("user") == null){
+            $state.go("app.login");
+        }
+
+
+
 
         // Data
         vm.contacts = ChatsService.contacts = Contacts.data;
@@ -20,6 +27,7 @@
         vm.chat = undefined;
 
         // Methods
+        vm.logout = logout;
         vm.getChat = getChat;
         vm.toggleSidenav = toggleSidenav;
         vm.toggleLeftSidenavView = toggleLeftSidenavView;
@@ -28,6 +36,19 @@
         vm.clearMessages = clearMessages;
 
         //////////
+
+        /**
+         * Logout Function
+         */
+        function logout()
+        {
+            Client.logout().$promise.then(function() {
+                $cookies.remove("user");
+                $state.go("app.login");
+            }); 
+        }
+
+
 
         /**
          * Get Chat by Contact id

@@ -11,7 +11,7 @@
         },
         {
             "id": "5725a680606588342058356d",
-            "name": "Arnold",
+            "name": "Roberto",
             "avatar": "assets/images/avatars/Arnold.jpg",
             "status": "do-not-disturb",
             "mood": "Looks like Andrew Jackson's been tossed to the back of the bus.",
@@ -20,7 +20,7 @@
         },
         {
             "id": "5725a68009e20d0a9e9acf2a",
-            "name": "Barrera",
+            "name": "Juan",
             "avatar": "assets/images/avatars/Barrera.jpg",
             "status": "do-not-disturb",
             "mood": "Love is going to bed early.Marriage is going to sleep early.",
@@ -33,8 +33,8 @@
         },
         {
             "id": "5725a6809fdd915739187ed5",
-            "name": "Blair",
-            "avatar": "assets/images/avatars/Blair.jpg",
+            "name": "Nimer",
+            "avatar": "http://0.0.0.0:3002/files/images/test.jpg",
             "status": "offline",
             "mood": "I would be unstoppable. If i could just get started.",
             "unread": 3,
@@ -46,7 +46,7 @@
         },
         {
             "id": "5725a68007920cf75051da64",
-            "name": "Boyle",
+            "name": "Seen",
             "avatar": "assets/images/avatars/Boyle.jpg",
             "status": "offline",
             "mood": "'GOOD MORNING COFFEE'....Meet your maker!!!!",
@@ -55,7 +55,7 @@
         },
         {
             "id": "5725a68031fdbb1db2c1af47",
-            "name": "Christy",
+            "name": "Cyak Blak",
             "avatar": "assets/images/avatars/Christy.jpg",
             "status": "offline",
             "mood": "We always hold hands. If I let go, she shops.",
@@ -68,7 +68,7 @@
         },
         {
             "id": "5725a680bc670af746c435e2",
-            "name": "Copeland",
+            "name": "Kawai-san",
             "avatar": "assets/images/avatars/Copeland.jpg",
             "status": "online",
             "mood": "I get enough exercise just pushing my luck.",
@@ -81,7 +81,7 @@
         },
         {
             "id": "5725a680e7eb988a58ddf303",
-            "name": "Estes",
+            "name": "Carlos",
             "avatar": "assets/images/avatars/Estes.jpg",
             "status": "away",
             "mood": "What comes after the man bun hairstyle? The he-hive!",
@@ -90,7 +90,7 @@
         },
         {
             "id": "5725a680dcb077889f758961",
-            "name": "Harper",
+            "name": "Chip",
             "avatar": "assets/images/avatars/Harper.jpg",
             "status": "offline",
             "mood": "Always try to be modest and be proud of it!",
@@ -197,7 +197,7 @@
         },
         {
             "id": "5725a6802d10e277a0f35775",
-            "name": "Shauna",
+            "name": "Mell",
             "avatar": "assets/images/avatars/Shauna.jpg",
             "status": "online",
             "mood": "My take home pay doesn’t ven take me home.",

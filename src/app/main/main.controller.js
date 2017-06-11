@@ -7,12 +7,8 @@
         .controller('MainController', MainController);
 
     /** @ngInject */
-    function MainController($scope, $rootScope)
+    function MainController($scope, $rootScope, $state)
     {
-        // Data
-
-        //////////
-
         // Remove the splash screen
         $scope.$on('$viewContentAnimationEnded', function (event)
         {

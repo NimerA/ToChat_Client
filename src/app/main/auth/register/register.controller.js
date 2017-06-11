@@ -3,16 +3,21 @@
     'use strict';
 
     angular
-        .module('app.pages.auth.register')
+        .module('app.register')
         .controller('RegisterController', RegisterController);
 
     /** @ngInject */
-    function RegisterController()
+    function RegisterController($state, Client)
     {
-        // Data
+        var vm = this;
+        vm.register = register;
+        vm.form = {};
 
-        // Methods
+        function register() {
+            Client.create({ username: vm.form.username, email:vm.form.email , password: vm.form.password }).$promise.then(function(response) {
+                $state.go("app.login");
+            });  
+        }
+    }    
 
-        //////////
-    }
 })();

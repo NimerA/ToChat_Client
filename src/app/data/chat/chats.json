@@ -8,17 +8,17 @@
             "dialog": [
                 {
                     "who": "contact",
-                    "message": "Quickly come to the meeting room 1B, we have a big server issue",
+                    "message": "Lel me estan pizando en las clases",
                     "time": "12 mins. ago"
                 },
                 {
                     "who": "user",
-                    "message": "I’m having breakfast right now, can’t you wait for 10 minutes?",
+                    "message": "Pasame la tarea de siso plz",
                     "time": "11 mins. ago"
                 },
                 {
                     "who": "contact",
-                    "message": "We are losing money! Quick!",
+                    "message": "Jueguemos Overwatch este finde!",
                     "time": "9 mins. ago"
                 },
                 {
@@ -28,7 +28,7 @@
                 },
                 {
                     "who": "contact",
-                    "message": "You are the worst!",
+                    "message": "Search for the answer on stackoverflow",
                     "time": "Just now"
                 },
                 {
@@ -58,22 +58,22 @@
                 },
                 {
                     "who": "contact",
-                    "message": "You are the worst!",
+                    "message": "LOLOLOLOLOLOL",
                     "time": "Just now"
                 },
                 {
                     "who": "contact",
-                    "message": "We are losing money! Quick!",
+                    "message": "LOLOLOLOLOLOL",
                     "time": "9 mins. ago"
                 },
                 {
                     "who": "user",
-                    "message": "It’s not my money, you know. I will eat my breakfast and then I will come to the meeting room.",
+                    "message": "LOLOLOLOLOLOL",
                     "time": "2 mins. ago"
                 },
                 {
                     "who": "contact",
-                    "message": "You are the worst!",
+                    "message": "LOLOLOLOLOLOL",
                     "time": "Just now"
                 }
             ]

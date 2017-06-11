@@ -4,10 +4,25 @@
 
     angular
         .module('app.chat')
+        .directive('fileModel', ['$parse', function ($parse) {
+            return {
+               restrict: 'A',
+               link: function(scope, element, attrs) {
+                  var model = $parse(attrs.fileModel);
+                  var modelSetter = model.assign;
+                  
+                  element.bind('change', function(){
+                     scope.$apply(function(){
+                        modelSetter(scope, element[0].files[0]);
+                     });
+                  });
+               }
+            };
+         }])
         .controller('ChatController', ChatController);
 
     /** @ngInject */
-    function ChatController($cookies, $rootScope, $state, Contacts, ChatsService, $mdSidenav, User, $timeout, $document, $mdMedia, Client)
+    function ChatController($cookies, $rootScope, $state, Contacts, ChatsService, $mdSidenav, User, $timeout, $document, $mdMedia, Client, $http)
     {
         
         var vm = this;
@@ -16,7 +31,7 @@
             $state.go("app.login");
         }
 
-
+        vm.apiUrl = "http://10.48.91.113:3002/api";
 
 
         // Data
@@ -25,6 +40,7 @@
         vm.user = User.data;
         vm.leftSidenavView = false;
         vm.chat = undefined;
+        vm.upload = false;
 
         // Methods
         vm.logout = logout;
@@ -34,7 +50,8 @@
         vm.reply = reply;
         vm.setUserStatus = setUserStatus;
         vm.clearMessages = clearMessages;
-
+        vm.sendMessage = sendMessage;
+        vm.download = downloadAttachment;
         //////////
 
         /**
@@ -107,7 +124,8 @@
             var message = {
                 who    : 'user',
                 message: vm.replyMessage,
-                time   : new Date().toISOString()
+                time   : new Date().toISOString(),
+                isAttachment : false
             };
 
             // Add the message to the chat
@@ -202,5 +220,54 @@
                 return x.id === value;
             })[0];
         };
+
+        function sendMessage( $event ) {
+            if( vm.upload ){
+                var file = vm.myFile;
+                var reg = /^image\/[a-z]*$/;
+                var regex = new RegExp(reg);
+
+                var fd = new FormData();
+                fd.append('file', file);
+
+                $http.post(vm.apiUrl + "/containers/files/upload", fd, {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                })
+                .success(function( data ){
+                    var image = data.result.files.file[0]; //base file :v 
+                    // Message
+                    var message = {
+                        who    : 'user',
+                        message: vm.apiUrl + "/containers/files/download/" + image.name,
+                        time   : new Date().toISOString(),
+                        isAttachment : true,
+                        isImage: regex.test(image.type)
+                    };
+
+                    // Add the message to the chat
+                    vm.chat.push(message);
+
+                    // Update Contact's lastMessage
+                    vm.contacts.getById(vm.chatContactId).lastMessage = message;
+
+                    // Reset the reply textarea
+                    resetReplyTextarea();
+
+                    // Scroll to the new message
+                    scrollToBottomOfChat();
+                })
+                .error(function( err ){
+                    console.log(err);
+                });
+            }else{
+                vm.reply($event);
+            }
+        }
+
+        function downloadAttachment( url ) {
+            // console.log(url);
+            return url;
+        }
     }
 })();

@@ -95,6 +95,11 @@
                                         Clear Messages
                                     </md-button>
                                 </md-menu-item>
+                                <md-menu-item>
+                                    <md-button ng-click="vm.upload=true">
+                                        Attach
+                                    </md-button>
+                                </md-menu-item>
                             </md-menu-content>
 
                         </md-menu>
@@ -119,9 +124,17 @@
                                  alt="{{vm.contacts.getById(vm.chatContactId).name}}"/>
 
                             <img ng-if="dialog.who ==='user'" class="avatar" ng-src="{{vm.user.avatar}}">
+                            
 
-                            <div class="bubble">
+                            <div class="bubble" ng-if="!dialog.isAttachment" >
                                 <div class="message">{{dialog.message}}</div>
+                                <div class="time secondary-text">{{dialog.time | altDate}}</div>
+                            </div>
+                            <div class="bubble" ng-if="dialog.isAttachment" >
+                                <a ng-if="!dialog.isImage" target="blank" ng-href="{{dialog.message}}">
+                                    <md-icon md-font-icon="icon-box-download"></md-icon>
+                                </a>
+                                <img ng-src="{{dialog.message}}" alt="" class="imageMessage" ng-if="dialog.isImage">
                                 <div class="time secondary-text">{{dialog.time | altDate}}</div>
                             </div>
 
@@ -138,10 +151,17 @@
                 <div class="chat-footer flex-noshrink" layout="row" layout-align="center center">
 
                     <!-- REPLY FORM -->
-                    <form ng-submit="vm.reply()" flex class="reply-form" layout="row" layout-align="start center">
+                    <form ng-submit="vm.sendMessage()" flex class="reply-form" layout="row" layout-align="start center">
 
-                        <md-input-container flex md-no-float>
-                            <textarea ng-keyup="vm.reply($event)"
+                        <md-input-container flex md-no-float ng-if="vm.upload">
+                            <input type="file" file-model="vm.myFile"/>
+                            <md-button class="md-fab" aria-label="Cancel" ng-click="vm.upload=false">
+                                <md-icon md-font-icon="icon-cancel"></md-icon>
+                            </md-button>
+                        </md-input-container>
+
+                        <md-input-container flex md-no-float ng-if="!vm.upload">
+                            <textarea ng-keyup="vm.sendMessage($event)"
                                       md-no-autogrow ng-model="vm.replyMessage"
                                       ng-class="{'grow': vm.textareaGrow}"
                                       placeholder="Type and hit enter to send message"

@@ -67,8 +67,10 @@
         },
         {
             "who": "contact",
-            "message": "You are the worst!",
-            "time": "2016-05-02T16:49:59.931Z"
+            "message": "http://10.48.91.113:3002/api/containers/audio/download/Holocene.mp3",
+            "time": "2016-05-02T16:49:59.931Z",
+            "isAttachment":true,
+            "isImage": false
         }
     ]
 }

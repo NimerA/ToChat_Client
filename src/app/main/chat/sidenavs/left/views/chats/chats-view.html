@@ -8,8 +8,8 @@
         <div class="avatar-wrapper">
 
             <!-- USER AVATAR -->
-            <img ng-click="vm.toggleLeftSidenavView('user')" ng-src="{{vm.user.avatar}}" class="md-avatar avatar"
-                 alt="{{vm.user.name}}"/>
+            <img ng-click="vm.toggleLeftSidenavView('user')" ng-src="{{vm.urlBase}}/containers/files/download/{{vm.user.avatar}}" class="md-avatar avatar"
+                 alt="{{vm.user.username}}"/>
             <!-- / USER AVATAR -->
 
             <!-- USER STATUS -->
@@ -23,7 +23,7 @@
                         <md-button ng-click="vm.setUserStatus('online')">
                             <div layout="row" layout-align="start center">
                                 <i class="icon s16 status icon-checkbox-marked-circle mr-8 green-fg"></i>
-                                <span translate="CHAT.STATUS_ONLINE">Online</span>
+                                <span >Online</span>
                             </div>
                         </md-button>
                     </md-menu-item>
@@ -32,7 +32,7 @@
                         <md-button ng-click="vm.setUserStatus('away')">
                             <div layout="row" layout-align="start center">
                                 <i class="icon s16 status icon-clock mr-8 yellow-fg"></i>
-                                <span translate="CHAT.STATUS_AWAY">Away</span>
+                                <span>Away</span>
                             </div>
                         </md-button>
                     </md-menu-item>
@@ -41,7 +41,7 @@
                         <md-button ng-click="vm.setUserStatus('do-not-disturb')">
                             <div layout="row" layout-align="start center">
                                 <i class="icon s16 status icon-minus-circle mr-8 red-fg"></i>
-                                <span translate="CHAT.STATUS_DO_NOT_DISTURB">Do not disturb</span>
+                                <span >Do not disturb</span>
                             </div>
                         </md-button>
                     </md-menu-item>
@@ -50,7 +50,7 @@
                         <md-button ng-click="vm.setUserStatus('offline')">
                             <div layout="row" layout-align="start center">
                                 <i class="icon s16 status icon-checkbox-blank-circle-outline mr-8 green-fg"></i>
-                                <span translate="CHAT.STATUS_OFFLINE">Offline</span>
+                                <span >Offline</span>
                             </div>
                         </md-button>
                     </md-menu-item>
@@ -72,12 +72,12 @@
 
             <md-menu-content width="3">
                 <md-menu-item>
-                    <md-button ng-click="vm.toggleLeftSidenavView('user')" translate="CHAT.PROFILE">
+                    <md-button ng-click="vm.toggleLeftSidenavView('user')" >
                         Profile
                     </md-button>
                 </md-menu-item>
                 <md-menu-item>
-                    <md-button ng-click="vm.logout()" translate="CHAT.LOGOUT">
+                    <md-button ng-click="vm.logout()" >
                         Logout
                     </md-button>
                 </md-menu-item>
@@ -99,8 +99,7 @@
                 <md-icon md-font-icon="icon-magnify" class="icon s18">
                 </md-icon>
 
-                <input flex ng-model="vm.chatSearch" type="text" placeholder="Search or start new chat" translate=""
-                       translate-attr-placeholder="CHAT.CHAT_SEARCH_PLACEHOLDER">
+                <input flex ng-model="vm.chatSearch" type="text" placeholder="Search or start new chat" >
 
             </div>
         </div>
@@ -119,8 +118,7 @@
     <md-list class="chat-list">
 
         <div ng-show="vm.chatSearch && filteredChat.length > 0" class="md-accent-fg subheader"
-             ng-style="{'transform':'translate3d(0px, 0px, 0px)', 'z-index': filteredChat.length + filteredContact.length }"
-             translate="CHAT.CHATS">
+             ng-style="{'transform':'translate3d(0px, 0px, 0px)', 'z-index': filteredChat.length + filteredContact.length }">
             CHATS
         </div>
 
@@ -130,12 +128,12 @@
                       ng-click="vm.getChat(contact.id)" ng-class="{'unread':contact.unread}">
 
             <div class="avatar-wrapper">
-                <img ng-src="{{contact.avatar}}" class="md-avatar avatar" alt="{{contact.name}}"/>
+                <img ng-src="{{contact.avatar}}" class="md-avatar avatar" alt="{{contact.username}}"/>
                 <i class="icon icon- s16 status" ng-class="contact.status"></i>
             </div>
 
             <div class="md-list-item-text">
-                <h3 class="name">{{contact.name}}</h3>
+                <h3 class="name">{{contact.username}}</h3>
                 <p class="last-message">{{contact.lastMessage.message}}</p>
             </div>
 
@@ -153,8 +151,7 @@
     <md-list class="contact-list">
 
         <div ng-show="vm.chatSearch && filteredContact.length > 0" class="md-accent-fg subheader"
-             ng-style="{'transform': (filteredContact.length > 0 && filteredChat.length > 0 ) ? 'translate3d(0px, '+(filteredChat.length +1) * 100+'%, 0px)':'translate3d(0px, 0px, 0px)', 'z-index': filteredContact.length}"
-             translate="CHAT.CONTACTS">
+             ng-style="{'transform': (filteredContact.length > 0 && filteredChat.length > 0 ) ? 'translate3d(0px, '+(filteredChat.length +1) * 100+'%, 0px)':'translate3d(0px, 0px, 0px)', 'z-index': filteredContact.length}">
             CONTACTS
         </div>
 
@@ -165,12 +162,12 @@
                       ng-click="vm.getChat(contact.id)">
 
             <div class="avatar-wrapper">
-                <img ng-src="{{contact.avatar}}" class="md-avatar avatar" alt="{{contact.name}}"/>
+                <img ng-src="{{contact.avatar}}" class="md-avatar avatar" alt="{{contact.username}}"/>
                 <i class="icon icon- s16 status" ng-class="contact.status"></i>
             </div>
 
             <div class="md-list-item-text">
-                <h3>{{contact.name}}</h3>
+                <h3>{{contact.username}}</h3>
                 <p class="mood">{{contact.mood}}</p>
             </div>
 
@@ -181,8 +178,7 @@
     <!-- / CONTACTS LIST-->
 
     <!-- NO RESULTS MESSAGE -->
-    <div ng-hide="(filteredChat.length + filteredContact.length) > 0" class="no-results-message"
-         translate="CHAT.NO_RESULTS">
+    <div ng-hide="(filteredChat.length + filteredContact.length) > 0" class="no-results-message">
         No results..
     </div>
     <!-- NO RESULTS MESSAGE-->

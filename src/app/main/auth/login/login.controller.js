@@ -11,28 +11,13 @@
     {
         var vm = this;
         vm.login = login;
-        vm.user = {};
 
         function login(){
-            
             Client.login({email: vm.user.email,password: vm.user.password}).$promise.then(function(response) {
-                var data = {
-                    id: response.user.id,
-                    tokenId: response.id,
-                    username: response.user.username  
-                }
-                //var date = Date.now();
-                //date.setHours(date.getHours()+4);
-                //console.log(date);
-
-                $cookies.putObject("user",data);
+                console.log("Logged In!");
                 $state.go("app.chat");
             });
         }
-
-        // Password RegExp: "/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}/"
-        // Data
-
         // Methods
 
         //////////

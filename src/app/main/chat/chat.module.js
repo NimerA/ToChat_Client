@@ -7,7 +7,7 @@
         .config(config);
 
     /** @ngInject */
-    function config($stateProvider, $translatePartialLoaderProvider, msApiProvider, msNavigationServiceProvider)
+    function config($stateProvider, $translatePartialLoaderProvider, msApiProvider)
     {
 
         // State
@@ -20,41 +20,25 @@
                 }
             },
             resolve: {
-                Contacts: function (msApi)
+                Clients: function(Client)
                 {
-                    return msApi.resolve('chat.contacts@get');
+                    return Client.find();
                 },
-                User    : function (msApi)
+                User: function(Client)
                 {
-                    return msApi.resolve('chat.user@get');
+                    return Client.getCurrent();
+                },
+                urlBase: function(LoopBackResource){
+                    return LoopBackResource.getUrlBase();
                 }
+            },
+            controller: function (Client, $state) {
+                if (Client.isAuthenticated() === false)
+                    $state.go('app.login');
             }
         });
 
-        // Translation
-        $translatePartialLoaderProvider.addPart('app/main/chat');
-
-        // Api
-
-        // Contacts data must be alphabatically ordered.
-        msApiProvider.register('chat.contacts', ['app/data/chat/contacts.json']);
-
         msApiProvider.register('chat.chats', ['app/data/chat/chats/:id.json']);
-
-        msApiProvider.register('chat.user', ['app/data/chat/user.json']);
-
-
-        // Navigation
-        msNavigationServiceProvider.saveItem('apps.chat', {
-            title : 'Chat',
-            icon  : 'icon-hangouts',
-            state : 'app.chat',
-            badge : {
-                content: 13,
-                color  : '#09d261'
-            },
-            weight: 5
-        });
     }
 
 })();

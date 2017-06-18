@@ -22,26 +22,20 @@
         .controller('ChatController', ChatController);
 
     /** @ngInject */
-    function ChatController($cookies, $rootScope, $state, Contacts, ChatsService, $mdSidenav, User, $timeout, $document, $mdMedia, Client, $http)
+    function ChatController($cookies, $rootScope, $state, ChatsService, $mdSidenav, User, $timeout, $document, $mdMedia, Client, $http, Container, Clients, urlBase)
     {
         
         var vm = this;
 
-        if($cookies.getObject("user") == null){
-            $state.go("app.login");
-        }
-
-        vm.apiUrl = "http://10.48.91.113:3002/api";
-
-
         // Data
-        vm.contacts = ChatsService.contacts = Contacts.data;
+        vm.contacts = ChatsService.contacts = Clients;
         vm.chats = ChatsService.chats;
-        vm.user = User.data;
+        vm.user = User;
         vm.leftSidenavView = false;
         vm.chat = undefined;
         vm.upload = false;
-
+        vm.urlBase = urlBase;
+        
         // Methods
         vm.logout = logout;
         vm.getChat = getChat;
@@ -53,19 +47,16 @@
         vm.sendMessage = sendMessage;
         vm.download = downloadAttachment;
         //////////
-
+        
         /**
          * Logout Function
          */
         function logout()
         {
             Client.logout().$promise.then(function() {
-                $cookies.remove("user");
                 $state.go("app.login");
             }); 
         }
-
-
 
         /**
          * Get Chat by Contact id
@@ -227,10 +218,12 @@
                 var reg = /^image\/[a-z]*$/;
                 var regex = new RegExp(reg);
 
+                console.log("Sending Message");
+                
                 var fd = new FormData();
                 fd.append('file', file);
-
-                $http.post(vm.apiUrl + "/containers/files/upload", fd, {
+                
+                $http.post(vm.urlBase + "/containers/files/upload", fd, {
                     transformRequest: angular.identity,
                     headers: {'Content-Type': undefined}
                 })
@@ -239,7 +232,7 @@
                     // Message
                     var message = {
                         who    : 'user',
-                        message: vm.apiUrl + "/containers/files/download/" + image.name,
+                        message: vm.urlBase + "/containers/files/download/" + image.name,
                         time   : new Date().toISOString(),
                         isAttachment : true,
                         isImage: regex.test(image.type)
@@ -256,10 +249,12 @@
 
                     // Scroll to the new message
                     scrollToBottomOfChat();
+
                 })
                 .error(function( err ){
                     console.log(err);
                 });
+                
             }else{
                 vm.reply($event);
             }

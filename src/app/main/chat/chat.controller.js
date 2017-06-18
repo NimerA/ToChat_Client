@@ -19,10 +19,15 @@
                }
             };
          }])
+        .factory('socket', function (socketFactory) {
+            var myIoSocket = io.connect('http://localhost:3002');
+            var socket = socketFactory({ ioSocket: myIoSocket });
+            return socket;
+        })
         .controller('ChatController', ChatController);
 
     /** @ngInject */
-    function ChatController($cookies, $rootScope, $state, ChatsService, $mdSidenav, User, $timeout, $document, $mdMedia, Client, $http, Container, Clients, urlBase)
+    function ChatController(ChatsService, $mdSidenav, User, $timeout, $document, $mdMedia, Client, $http, Container, Clients, urlBase, socket)
     {
         
         var vm = this;
@@ -45,9 +50,13 @@
         vm.setUserStatus = setUserStatus;
         vm.clearMessages = clearMessages;
         vm.sendMessage = sendMessage;
-        vm.download = downloadAttachment;
         //////////
         
+
+        //Socket.io
+
+
+        ///////////
         /**
          * Logout Function
          */
@@ -57,6 +66,8 @@
                 $state.go("app.login");
             }); 
         }
+
+        
 
         /**
          * Get Chat by Contact id
@@ -121,6 +132,7 @@
 
             // Add the message to the chat
             vm.chat.push(message);
+            socket.emit('sendMessage', 1, vm.user, message.message);
 
             // Update Contact's lastMessage
             vm.contacts.getById(vm.chatContactId).lastMessage = message;
@@ -258,11 +270,6 @@
             }else{
                 vm.reply($event);
             }
-        }
-
-        function downloadAttachment( url ) {
-            // console.log(url);
-            return url;
         }
     }
 })();

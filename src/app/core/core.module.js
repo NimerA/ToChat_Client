@@ -14,6 +14,7 @@
                 'ngMaterial',
                 'pascalprecht.translate',
                 'ui.router',
-                'lbServices'              
+                'lbServices',
+                'btford.socket-io'              
             ]);
 })();

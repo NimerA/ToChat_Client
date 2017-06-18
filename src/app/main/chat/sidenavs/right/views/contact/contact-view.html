@@ -20,7 +20,7 @@
 
         <div layout="column" layout-align="center center">
 
-            <img ng-src="{{vm.contacts.getById(vm.chatContactId).avatar}}" class="md-avatar avatar contact-avatar huge"
+            <img ng-src="{{vm.urlBase}}/containers/files/download/{{vm.contacts.getById(vm.chatContactId).avatar}}" class="md-avatar avatar contact-avatar huge"
                  alt="{{vm.contacts.getById(vm.chatContactId).name}}"/>
 
             <div class="contact-name">{{vm.contacts.getById(vm.chatContactId).name}}</div>

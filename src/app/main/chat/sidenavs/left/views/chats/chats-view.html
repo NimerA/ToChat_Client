@@ -128,7 +128,7 @@
                       ng-click="vm.getChat(contact.id)" ng-class="{'unread':contact.unread}">
 
             <div class="avatar-wrapper">
-                <img ng-src="{{contact.avatar}}" class="md-avatar avatar" alt="{{contact.username}}"/>
+                <img ng-src="{{vm.urlBase}}/containers/files/download/{{contact.avatar}}" class="md-avatar avatar" alt="{{contact.username}}"/>
                 <i class="icon icon- s16 status" ng-class="contact.status"></i>
             </div>
 
@@ -162,7 +162,7 @@
                       ng-click="vm.getChat(contact.id)">
 
             <div class="avatar-wrapper">
-                <img ng-src="{{contact.avatar}}" class="md-avatar avatar" alt="{{contact.username}}"/>
+                <img ng-src="{{vm.urlBase}}/containers/files/download/{{contact.avatar}}" class="md-avatar avatar" alt="{{contact.username}}"/>
                 <i class="icon icon- s16 status" ng-class="contact.status"></i>
             </div>
 
